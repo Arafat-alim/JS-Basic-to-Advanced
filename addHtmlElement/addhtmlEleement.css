@@ -1,0 +1,16 @@
+body{
+    background-color: blanchedalmond;
+}
+h1{
+    text-align: center;
+}
+div{
+    display: flex;
+    justify-content: center;
+}
+button{
+    color: brown;
+    font-size: larger;
+    background-color: antiquewhite;
+    padding: 10px;
+}
