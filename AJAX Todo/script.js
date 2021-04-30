@@ -80,8 +80,10 @@ function getTODOList(){
                 //workking with Http Request call
                 var response = JSON.parse(this.responseText); // array se print karwao
                 for(var i=0; i<response.length; i++){
-                    console.log(response[i].id,response[i].title);
+                    //console.log(todoListDynamically(response[i].id, response[i].title));
+                    list.appendChild(todoListDynamically(response[i].id, response[i].title)); //adding api values here
                 }
+                
             }else{
                 console.log("Call Failed");
             }
@@ -92,3 +94,15 @@ function getTODOList(){
     http.send();
 }
 getTODOList(); //function calling 
+
+//adding todolist Dynamically
+function todoListDynamically(id, title){
+    var newElementList = document.createElement('li'); // create a new list by taking tag as a 'li'
+    // newElementList.id = "item- " + (list.childElementCount + 1); //adding dynamic id to my list 
+    newElementList.id = id;
+    //var textNode = document.createTextNode("List Item " + (list.childElementCount)); //making list value
+    var textNode = document.createTextNode(title);
+    newElementList.appendChild(textNode); //adding my list item at the end 
+
+    return newElementList;
+}
