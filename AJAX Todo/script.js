@@ -76,7 +76,12 @@ function getTODOList(){
             // console.log("Response Received");
             // console.log(this.responseText); // array me ajyga JSON STRING
             if(this.status === 200){
-                console.log(JSON.parse(this.responseText)); //JSON STRING into JSON Object
+                // console.log(JSON.parse(this.responseText)); //JSON STRING into JSON Object
+                //workking with Http Request call
+                var response = JSON.parse(this.responseText); // array se print karwao
+                for(var i=0; i<response.length; i++){
+                    console.log(response[i].id,response[i].title);
+                }
             }else{
                 console.log("Call Failed");
             }
