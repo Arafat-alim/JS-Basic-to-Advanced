@@ -46,7 +46,7 @@ function addListItem(){
         }    
 }
 
-btnAdd.addEventListener('click', addListItem);
+btnAdd.addEventListener('click', createDataAtMyBackend);
 
 //updateFirstList
 updateList.addEventListener('click', function(){
@@ -105,4 +105,32 @@ function todoListDynamically(id, title){
     newElementList.appendChild(textNode); //adding my list item at the end 
 
     return newElementList;
+}
+
+
+//User can add their data to the apio backend in my todo list
+function createDataAtMyBackend(){
+    var http = new XMLHttpRequest(); // new instance
+    http.open('POST', 'https://jsonplaceholder.typicode.com/todos', true); //true mean async
+    http.onreadystatechange = function(){
+        if(this.readyState === 4){
+            // console.log("Response Received");
+            // console.log(this.responseText); // array me ajyga JSON STRING
+            if(this.status === 201){
+                var response = JSON.parse(this.responseText);
+                list.appendChild(todoListDynamically(response.id, currentInput))
+                console.log("Add item to the list")
+                
+            }else{
+                console.log("Call Failed");
+            }
+            
+        }
+    }
+    var obj = JSON.stringify({
+    "userId": 1,
+    "title": currentInput,
+    "completed": false
+    });
+    http.send(obj);
 }
