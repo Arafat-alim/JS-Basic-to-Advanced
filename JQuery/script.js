@@ -1,7 +1,10 @@
 //console.log("WelcomeHome")
 
-var btnAdd = document.getElementById("add-item"); // making my button responsive on click , here access var
-var list = document.getElementById("addList");
+$(document).ready(function(){ 
+    console.log("DOM tree Ready")
+    var btnAdd = document.getElementById("add-item"); // making my button responsive on click , here access var
+//var list = document.getElementById("addList");
+var list = $('#addList'); //jquery bolte - syntax selector
 var inputElement = document.getElementById('todoInput');
 var updateList = document.getElementById("replace-item");
 var deleteList = document.getElementById("delete-item");
@@ -26,7 +29,7 @@ function newListNode(){ //creating new list codes
     newElementList.id = "item- " + (list.childElementCount + 1); //adding dynamic id to my list 
     //var textNode = document.createTextNode("List Item " + (list.childElementCount)); //making list value
     var textNode = document.createTextNode(currentInput);
-    newElementList.appendChild(textNode); //adding my list item at the end 
+    newElementList.append(textNode); //adding my list item at the end 
 
     return newElementList;
 }
@@ -35,7 +38,7 @@ function addListItem(){
     if(currentInput !== null && currentInput !== undefined && currentInput !== ""){
         //alert("Welcome User")
             var newElementList = newListNode(); //calling func for creating a newlist
-            list.appendChild(newElementList) //adding my newELementlist in my unoderedList
+            list.append(newElementList) //adding my newELementlist in my unoderedList
             //list count
             //newElementList= list.childElementCount + 1;
             //console.log(newElementList)
@@ -81,7 +84,7 @@ function getTODOList(){
                 var response = JSON.parse(this.responseText); // array se print karwao
                 for(var i=0; i<response.length; i++){
                     //console.log(todoListDynamically(response[i].id, response[i].title));
-                    list.appendChild(todoListDynamically(response[i].id, response[i].title)); //adding api values here
+                    list.append(todoListDynamically(response[i].id, response[i].title)); //adding api values here
                 }
                 
             }else{
@@ -134,3 +137,4 @@ function createDataAtMyBackend(){
     });
     http.send(obj); 
 }
+})
